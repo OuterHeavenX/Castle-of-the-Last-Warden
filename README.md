@@ -19,10 +19,12 @@ Production: run `npm run build`, then `npm run start`. The generated Cloudflare-
 - Boss reward: Castle Level 2 and Western Hall unlock
 - Bestiary kills/research, manual save, autosave after defense, refresh-safe local persistence
 - Responsive keyboard and touch interface
+- Raster sprite atlases for the Warden, Elara, six enemies/bosses, defenses and key props
+- Frame-based actor/defense animation with procedural original music, ambience and SFX
 
 ## Architecture
 
-`app/` provides the browser shell and presentation. `src/core/` owns versioned persistence, `src/game/` contains data and domain types, and `src/ui/` contains the interactive game surface. Definitions are separated so future items, enemies, quests, disciplines and defenses can move to JSON without rewriting the runtime.
+`app/` provides the browser shell and presentation. `src/core/` owns versioned persistence and audio, `src/game/` contains data and domain types, `src/ui/` contains the interactive game surface, and `src/assets/` contains organized raster atlases and metadata. The canonical rendering scale is documented in `docs/WORLD_SCALE.md`.
 
 ## Saves
 
@@ -30,14 +32,14 @@ Saves use a versioned device-local browser record (`last-warden-save-v1`). Versi
 
 ## Roadmap / known limitations
 
-The slice intentionally favors one complete loop over broad empty systems. Audio synthesis/assets, gamepad input, multi-slot screenshots, crafting, advanced platforming, full equipment comparison, multiple castle rooms, and expanded NPC stories are deferred. Current combat uses stylized CSS pixel theatre rather than a final sprite atlas.
+The slice intentionally favors one complete loop over broad empty systems. Gamepad input, multi-slot screenshots, crafting, advanced platforming, equipment-driven weapon skins, recorded orchestral audio, multiple castle rooms, and expanded NPC stories are deferred. The current raster sheets establish a coherent production foundation but remain first-pass atlases rather than final hand-authored frame polish.
 
 ## Deployment
 
-The project is static-host friendly and has no private backend. Build with `npm run build`; deploy the generated worker/static bundle to a compatible host. GitHub Pages may require a static-export adapter; Cloudflare Pages/Workers is the native deployment target.
+The project is static-host friendly and has no private backend. Build the protected GitHub Pages output with `npm run build:pages`; the complete static site is emitted to `dist-pages/`. The existing Pages workflow publishes that directory. The separate `npm run build` command remains available for the Vinext/Cloudflare-compatible output.
 
 ## Credits and licensing
 
-Game design, writing, UI, CSS pixel artwork and code are original. The Gothic Great Hall visual anchor and Haunted Forest environment were generated specifically for this project with OpenAI image generation, then cropped/integrated into the game; they are stored under `src/assets/`. No third-party game sprites, maps, music, fonts, ripped assets, or proprietary franchise material are included.
+Game design, writing, UI, CSS pixel artwork and code are original. The Gothic Great Hall, Haunted Forest, and raster atlas source imagery were generated specifically for this project with OpenAI image generation, then keyed, integrated and animated for the game; they are stored under `src/assets/`. No third-party game sprites, maps, music, fonts, ripped assets, or proprietary franchise material are included.
 
-The project does not currently ship a music or sound-effects pack. Future audio must be original, public-domain, or accompanied by its license record before inclusion.
+Music, ambience, and sound effects are original runtime synthesis authored in `src/core/AudioManager.ts`; provenance is documented in `src/assets/audio/README.md`. Future recorded audio must be original, public-domain, or accompanied by its license record before inclusion.
