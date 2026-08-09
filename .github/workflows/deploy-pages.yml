@@ -33,13 +33,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build static export
-        run: npm run build
+      - name: Build GitHub Pages static game
+        run: npm run build:pages
+
+      - name: Verify deployable entry point
+        run: |
+          test -f dist-pages/index.html
+          touch dist-pages/.nojekyll
+          echo "Static game entry verified: dist-pages/index.html"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/client
+          path: ./dist-pages
 
   deploy:
     environment:
