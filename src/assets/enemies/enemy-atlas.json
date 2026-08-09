@@ -1,0 +1,1 @@
+{"image":"enemy-atlas.png","grid":{"columns":8,"rows":6},"nativeCell":{"width":64,"height":64},"rows":{"wretch":0,"hound":1,"shade":2,"knight":3,"bat":4,"bellbeast":5},"sequence":{"idle":0,"moveStart":1,"attackAnticipation":3,"attack":4,"hurt":5,"deathStart":6,"deathEnd":7},"fps":7}
