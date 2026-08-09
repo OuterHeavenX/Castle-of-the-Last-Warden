@@ -26,6 +26,9 @@
 npm-debug.log*
 dev.stdout.log
 dev.stderr.log
+pages-preview.stdout.log
+pages-preview.stderr.log
+/tmp/
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
@@ -37,6 +40,8 @@ yarn-error.log*
 .vercel
 
 /dist/
+/dist-pages/
+*.tsbuildinfo
 /.wrangler/
 /outputs/
 /work/
