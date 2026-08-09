@@ -7,3 +7,5 @@ export type SaveData = {
   defenses: Record<string, number>; westernHall: boolean; playtime: number; savedAt: string;
 };
 export type Enemy = { id: number; kind: EnemyKind; x: number; hp: number; maxHp: number; speed: number; damage: number; color: string };
+export type ActorPhase = "idle" | "move" | "attack" | "hurt" | "death";
+export type ActiveEnemy = Enemy & { phase: ActorPhase; phaseUntil: number; rewarded: boolean };
