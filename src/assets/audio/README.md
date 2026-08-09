@@ -9,6 +9,8 @@ Web Audio implementation in `src/core/AudioManager.ts`.
 - The title, sanctuary, forest, and defense scores are lightweight original
   procedural motifs. Combat, bell, forge, progression, and defense sounds are
   original synthesized effects.
+- The stabilization pass adds timed sword contact, player/enemy/boss reactions,
+  jump/land, stone footsteps, ability-learn, boss-intro, and boss-death cues.
 - Audio is cosmetic and failure-safe: unavailable or suspended browser audio
   never blocks gameplay.
 
