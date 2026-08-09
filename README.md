@@ -38,4 +38,6 @@ The project is static-host friendly and has no private backend. Build with `npm 
 
 ## Credits and licensing
 
-Game design, writing, UI, CSS artwork and code are original. Version 0.1 contains no third-party art, music, fonts or ripped assets.
+Game design, writing, UI, CSS pixel artwork and code are original. The Gothic Great Hall visual anchor and Haunted Forest environment were generated specifically for this project with OpenAI image generation, then cropped/integrated into the game; they are stored under `src/assets/`. No third-party game sprites, maps, music, fonts, ripped assets, or proprietary franchise material are included.
+
+The project does not currently ship a music or sound-effects pack. Future audio must be original, public-domain, or accompanied by its license record before inclusion.
