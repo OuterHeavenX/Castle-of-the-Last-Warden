@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { PlayerController } from "../dist-movement/player-controller.js";
+import { PlayerController, interactionAt } from "../dist-movement/player-controller.js";
 
 const run=(controller,seconds,fps)=>{for(let i=0;i<seconds*fps;i++)controller.step(1/fps)};
 const jumpStats=(fps,releaseAt=Infinity)=>{const p=new PlayerController();p.input.pressJump();let peak=0,air=0;for(let i=0;i<fps*2;i++){if(i/fps>=releaseAt)p.input.releaseJump();p.step(1/fps);peak=Math.max(peak,p.state.y);if(!p.state.grounded)air+=1/fps;if(i>2&&p.state.grounded)break}return{peak,air}};
@@ -16,3 +16,9 @@ test("allows and expires coyote time",()=>{const allowed=new PlayerController();
 test("travel and jump remain stable at 30, 60, and 120 fps",()=>{const distances=[],jumps=[];for(const fps of [30,60,120]){const p=new PlayerController();p.input.keyDown("d");run(p,2,fps);distances.push(p.state.x);jumps.push(jumpStats(fps))}assert.ok(Math.max(...distances)-Math.min(...distances)<3);assert.ok(Math.max(...jumps.map(x=>x.peak))-Math.min(...jumps.map(x=>x.peak))<5);assert.ok(Math.max(...jumps.map(x=>x.air))-Math.min(...jumps.map(x=>x.air))<.05)});
 
 test("caps a resumed 500 ms frame",()=>{const p=new PlayerController();p.input.keyDown("d");p.step(.5);assert.ok(p.state.x<230)});
+
+test("combines direction and jump without dropping either input",()=>{const p=new PlayerController();p.input.holdDirection(11,1);p.input.pressJump();run(p,.1,60);assert.ok(p.state.x>220);assert.ok(p.state.y>0);p.input.releaseJump();run(p,.1,60);assert.ok(p.state.vx>0);p.input.releasePointer(11);run(p,.3,60);assert.ok(Math.abs(p.state.vx)<1)});
+
+test("clearing interrupted input prevents stuck movement",()=>{const p=new PlayerController();p.input.holdDirection(21,-1);run(p,.2,60);assert.ok(p.state.vx<0);p.input.clear();run(p,.2,60);assert.equal(p.state.inputDirection,0);assert.ok(Math.abs(p.state.vx)<1)});
+
+test("world interactions only appear inside their proximity zones",()=>{assert.equal(interactionAt(130,false),"elara");assert.equal(interactionAt(500,false),"map");assert.equal(interactionAt(810,false),"bell");assert.equal(interactionAt(940,false),"sealed");assert.equal(interactionAt(350,false),null);assert.equal(interactionAt(940,true),"western")});

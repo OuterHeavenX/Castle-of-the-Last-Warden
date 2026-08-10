@@ -14,3 +14,5 @@ export class PlayerController {
   setEnabled(enabled:boolean){if(!enabled)this.input.clear()}
   snapshot(){return{...this.state}}
 }
+
+export { interactionAt } from "./RoomDefinitions";
