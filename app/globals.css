@@ -40,3 +40,22 @@
 @keyframes enemyAttack{0%{background-position-x:0;transform:translateX(0) scaleX(1)}35%{background-position-x:28.571%;transform:translateX(3px) scaleX(.94)}70%{background-position-x:71.429%;transform:translateX(-7px) scaleX(1.05)}100%{background-position-x:100%;transform:translateX(0)}}@keyframes enemyDeath{0%{background-position-x:0;opacity:1;transform:translateY(0)}70%{background-position-x:85.714%;opacity:.8;transform:translateY(5px)}100%{background-position-x:100%;opacity:0;transform:translateY(12px) scaleY(.45)}}@keyframes bossDeath{0%{background-position-x:0;filter:brightness(1.7)}45%{background-position-x:57.143%;transform:translateY(4px)}100%{background-position-x:100%;opacity:0;transform:translateY(20px) scale(.8)}}@keyframes defenseFire{50%{transform:translateX(-3px);filter:brightness(1.45)}}@keyframes trailWindow{0%,28%,100%{opacity:0}40%,68%{opacity:.85}}
 @media(max-width:900px){.game{--actor-floor:22%}}
 .overlay-dismiss{position:absolute;inset:0;width:100%;height:100%;min-height:0;border:0;background:transparent;padding:0}
+
+/* Clean environment plate: gameplay actors must never be baked into room art. */
+.stage-hall{background-image:linear-gradient(#08101a66,#080a0c44),url("../src/assets/castle/rooms/great-hall-clean.png")}
+.title-backdrop{background-image:linear-gradient(#08101e99,#06080dcc),url("../src/assets/castle/rooms/great-hall-clean.png")}
+
+/* Ledger previews must remain inside their frame at every landscape height. */
+.full-warden{overflow:hidden}
+.full-warden .warden-sprite{transform:scale(1.6)}
+.ledger aside{overflow-y:auto;overscroll-behavior:contain}
+.ledger aside,.ledger-content{scrollbar-width:thin;scrollbar-color:#68583b #0b0f17}
+.ledger aside::-webkit-scrollbar,.ledger-content::-webkit-scrollbar{width:5px}
+.ledger aside::-webkit-scrollbar-track,.ledger-content::-webkit-scrollbar-track{background:#0b0f17}
+.ledger aside::-webkit-scrollbar-thumb,.ledger-content::-webkit-scrollbar-thumb{background:#68583b}
+@media(max-width:700px) and (orientation:landscape){
+  .full-warden .warden-sprite{transform:scale(.88)}
+  .full-warden{min-height:220px}
+  .ledger-content{padding:18px}
+}
+@media(max-width:900px) and (orientation:landscape){.warden-sheet{grid-template-columns:220px 1fr}.full-warden{min-height:220px}.full-warden .warden-sprite{transform:scale(1.02)}}
