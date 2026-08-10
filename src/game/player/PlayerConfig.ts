@@ -29,8 +29,8 @@ export const ROOM_GEOMETRY = {
 } as const;
 
 export const INTERACTIONS = {
-  elara: { x: 130, radius: 170 },
-  castleMap: { x: 500, radius: 230 },
+  elara: { x: 130, radius: 100 },
+  castleMap: { x: 500, radius: 90 },
   nightBell: { x: 810, radius: 90 },
   westernHall: { x: 940, radius: 55 },
 } as const;
